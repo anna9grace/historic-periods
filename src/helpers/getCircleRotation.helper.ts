@@ -1,1 +1,2 @@
-export const getCircleRotation = (index: number) => (360 / 6) * index;
+export const getCircleRotation = (index: number, total: number) =>
+  (360 / total) * index;

@@ -58,10 +58,10 @@ export const CircleButton: FC<ICircleButtonProps> = ({
   useEffect(() => {
     gsap.to(currentRef.current, {
       transform: getInitialPosition(period.id - 2, total, radius),
-      rotate: getCircleRotation(activeId - 1),
+      rotate: getCircleRotation(activeId - 1, total),
       duration: 0,
     });
-  }, [radius]);
+  }, [radius, total]);
 
   useEffect(() => {
     const active = activeId === period.id;
@@ -91,7 +91,7 @@ export const CircleButton: FC<ICircleButtonProps> = ({
 
   const updateAnimation = () => {
     gsap.to(currentRef.current, {
-      rotate: getCircleRotation(activeId - 1),
+      rotate: getCircleRotation(activeId - 1, total),
     });
 
     activeId === period.id ? handleOnButtonHover() : handleOnButtonLeave();

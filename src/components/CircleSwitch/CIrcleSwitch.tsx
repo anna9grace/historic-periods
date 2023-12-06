@@ -53,7 +53,7 @@ export const CircleSwitch: FC<ICircleSwitchProps> = ({
 
   useEffect(() => {
     updateAnimation(currentPeriod.id);
-  }, [currentPeriod]);
+  }, [currentPeriod, periods]);
 
   const handleOnButtonClick = (id: number) => {
     onClick(id);
@@ -67,7 +67,7 @@ export const CircleSwitch: FC<ICircleSwitchProps> = ({
 
   const updateAnimation = (id: number) => {
     gsap.to(wrapperRef.current, {
-      rotate: `-${getCircleRotation(id - 1)}`,
+      rotate: `-${getCircleRotation(id - 1, Object.values(periods).length)}`,
     });
   };
 
