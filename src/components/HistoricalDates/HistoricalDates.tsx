@@ -5,6 +5,8 @@ import { Typography } from "../ui/Typography/Typography";
 import { Period } from "../Period/Period";
 import { IHistoricalPeriod } from "../../services/data.types";
 import { historicalData } from "../../services/data.mock";
+import { ControlButtons } from "../ControlButtons/ControlButtons";
+import { EventsSlider } from "../EventsSlider/EventsSlider";
 
 const Container = styled.div`
   display: flex;
@@ -79,6 +81,12 @@ export const HistoricalDates: FC = () => {
             currentPeriod={period}
             onClick={setCurrentPeriodId}
           />
+          <ControlButtons
+            onClick={setCurrentPeriodId}
+            currentPeriod={currentPeriodId}
+            total={Object.values(historicalData).length}
+          />
+          <EventsSlider events={period.events} />
         </Wrapper>
       </Container>
     </ThemeProvider>

@@ -7,7 +7,7 @@ import {
 import { Tag, TextTransform } from "./Typography.types";
 
 interface ITypographyProps {
-  children: string | number;
+  children: React.ReactNode;
   className?: string;
   variant?: ThemeTypographyVariants;
   component?: Tag;

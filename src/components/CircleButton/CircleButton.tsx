@@ -4,7 +4,7 @@ import { Typography } from "../ui/Typography/Typography";
 import { IHistoricalPeriod } from "../../services/data.types";
 import { Button } from "../ui/Button/Button";
 import { gsap } from "gsap";
-import { getCircleRotation } from "../helpers/getCircleRotation.helper";
+import { getCircleRotation } from "../../helpers/getCircleRotation.helper";
 import { getInitialPosition } from "./CircleButton.helper";
 
 export interface ICircleButtonProps {
@@ -67,11 +67,7 @@ export const CircleButton: FC<ICircleButtonProps> = ({
     const active = activeId === period.id;
     setIsActive(active);
 
-    !active && handleOnButtonLeave();
-
-    gsap.to(currentRef.current, {
-      rotate: getCircleRotation(activeId - 1),
-    });
+    updateAnimation();
   }, [activeId, period]);
 
   const handleOnButtonHover = () => {
@@ -94,9 +90,12 @@ export const CircleButton: FC<ICircleButtonProps> = ({
       });
   };
 
-  const handleOnClick = (evt: Event, id: number) => {
-    evt.preventDefault();
-    onClick(id);
+  const updateAnimation = () => {
+    gsap.to(currentRef.current, {
+      rotate: getCircleRotation(activeId - 1),
+    });
+
+    activeId === period.id ? handleOnButtonHover() : handleOnButtonLeave();
   };
 
   return (
@@ -107,10 +106,7 @@ export const CircleButton: FC<ICircleButtonProps> = ({
       onMouseEnter={!isActive ? handleOnButtonHover : undefined}
       onMouseLeave={!isActive ? handleOnButtonLeave : undefined}
     >
-      <SwitchButton
-        size="large"
-        onClick={(evt) => handleOnClick(evt, period.id)}
-      >
+      <SwitchButton size="large" onClick={() => onClick(period.id)}>
         <Typography>{period.id}</Typography>
         {isActive && (
           <ButtonLabel variant="body1" bold component="span">

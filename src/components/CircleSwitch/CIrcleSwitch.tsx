@@ -6,7 +6,7 @@ import { IHistoricalPeriod, IHistoricalData } from "../../services/data.types";
 import { CircleButton } from "../CircleButton/CircleButton";
 import gsap from "gsap";
 import { TweenMax } from "gsap";
-import { getCircleRotation } from "../helpers/getCircleRotation.helper";
+import { getCircleRotation } from "../../helpers/getCircleRotation.helper";
 
 export interface ICircleSwitchProps {
   periods: IHistoricalData;
@@ -25,6 +25,8 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 49vh;
   width: 49vh;
+  max-height: 600px;
+  max-width: 600px;
   margin: auto;
   border-radius: 50%;
   border: 1px solid rgba(${(props) => props.theme.palette.transparent}, 0.2);
@@ -44,6 +46,10 @@ export const CircleSwitch: FC<ICircleSwitchProps> = ({
     return () => window.removeEventListener("resize", updateRadius);
   }, [wrapperRef]);
 
+  useEffect(() => {
+    updateAnimation(currentPeriod.id);
+  }, [currentPeriod]);
+
   const updateRadius = () => {
     if (!wrapperRef.current?.offsetHeight) return;
     setCurrentRadius(wrapperRef.current?.offsetHeight / 2);
@@ -51,7 +57,10 @@ export const CircleSwitch: FC<ICircleSwitchProps> = ({
 
   const handleOnButtonClick = (id: number) => {
     onClick(id);
+    updateAnimation(id);
+  };
 
+  const updateAnimation = (id: number) => {
     gsap.to(wrapperRef.current, {
       rotate: `-${getCircleRotation(id - 1)}`,
     });

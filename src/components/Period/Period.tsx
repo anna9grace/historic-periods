@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  margin: 8vh 0 10vh;
   &::before,
   &::after {
     content: "";
@@ -44,6 +45,7 @@ const Year = styled(Typography).attrs<{ $startYear?: boolean }>((props) => ({
   margin: 0 40px;
   padding-bottom: 20px;
   letter-spacing: -4px;
+  line-height: 100%;
   color: ${(props) =>
     props.theme.palette[props.$startYear ? "secondary" : "tertiary"]};
 `;
