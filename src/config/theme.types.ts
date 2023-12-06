@@ -5,7 +5,7 @@ export type ThemeTypographyVariants =
   | "body1"
   | "body2"
   | "body3";
-export type ThemeBreakpoints = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+export type ThemeBreakpoints = "sm" | "md" | "lg" | "xl";
 export type ThemeFontVariants = "primary" | "secondary";
 
 export type ThemeColors =
@@ -13,6 +13,7 @@ export type ThemeColors =
   | "secondary"
   | "tertiary"
   | "main"
+  | "border"
   | "background"
   | "white"
   | "transparent";

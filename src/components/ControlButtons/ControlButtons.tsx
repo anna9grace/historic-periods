@@ -1,20 +1,26 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { styled } from "styled-components";
 
 import { Button } from "../ui/Button/Button";
-
-import { IHistoricalData, IHistoricalPeriod } from "../../services/data.types";
 import { Typography } from "../ui/Typography/Typography";
 
 export interface IControlButtonsProps {
-  onClick: (periodId: number) => void;
   currentPeriod: number;
   total: number;
+  onClick: (periodId: number) => void;
 }
 
 const Wrapper = styled.div`
   align-self: flex-start;
   padding-left: 4.2vw;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    position: fixed;
+    bottom: calc(13px + env(safe-area-inset-bottom, 0));
+    left: 20px;
+    padding-left: 0;
+    z-index: 2;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -23,6 +29,10 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    gap: 8px;
+    margin-top: 10px;
+  }
 `;
 
 export const ControlButtons: FC<IControlButtonsProps> = ({
@@ -45,14 +55,14 @@ export const ControlButtons: FC<IControlButtonsProps> = ({
       </Typography>
       <ButtonWrapper>
         <Button
-          onClick={handleOnPrevClick}
           disabled={currentPeriod === 1}
           control="prev"
+          onClick={handleOnPrevClick}
         />
         <Button
-          onClick={handleOnNextClick}
           disabled={currentPeriod === total}
           control="next"
+          onClick={handleOnNextClick}
         />
       </ButtonWrapper>
     </Wrapper>

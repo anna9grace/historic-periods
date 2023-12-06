@@ -1,8 +1,9 @@
 import React from "react";
-import { HistoricalDates } from "./components/HistoricalDates/HistoricalDates";
 import { createGlobalStyle, styled } from "styled-components";
 
-const GlobalStyle = createGlobalStyle<{ $whiteColor?: boolean }>`
+import { HistoricalDates } from "./components/HistoricalDates/HistoricalDates";
+
+const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'PT Sans', sans-serif;
   }
@@ -23,11 +24,11 @@ const GlobalStyle = createGlobalStyle<{ $whiteColor?: boolean }>`
 `;
 
 const Layout = styled.div`
+  position: relative;
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  position: relative;
 `;
 
 function App() {

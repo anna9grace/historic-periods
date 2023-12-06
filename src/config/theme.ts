@@ -7,6 +7,7 @@ export const theme: DefaultTheme = {
     tertiary: "#EF5DA8",
     main: "#42567A",
     background: "#F4F5F9",
+    border: "#C7CDD9",
     white: "#FFFFFF",
     transparent: "66, 86, 122",
   },
@@ -41,11 +42,9 @@ export const theme: DefaultTheme = {
     },
   },
   breakpoints: {
-    xs: 0,
     sm: 576,
     md: 768,
     lg: 992,
-    xl: 1200,
-    xxl: 1400,
+    xl: 1400,
   },
 };

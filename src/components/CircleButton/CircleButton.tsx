@@ -1,10 +1,10 @@
 import React, { FC, useRef, useState, useEffect, useContext } from "react";
 import { styled, ThemeContext } from "styled-components";
-import { Typography } from "../ui/Typography/Typography";
-import { IHistoricalPeriod } from "../../services/data.types";
-import { Button } from "../ui/Button/Button";
 import { gsap } from "gsap";
+import { IHistoricalPeriod } from "../../services/data.types";
 import { getCircleRotation } from "../../helpers/getCircleRotation.helper";
+import { Typography } from "../ui/Typography/Typography";
+import { Button } from "../ui/Button/Button";
 import { getInitialPosition } from "./CircleButton.helper";
 
 export interface ICircleButtonProps {
@@ -17,23 +17,23 @@ export interface ICircleButtonProps {
 
 const ButtonWrapper = styled.span`
   position: absolute;
-  width: 56px;
-  height: 56px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 56px;
+  height: 56px;
   margin: auto;
 `;
 
 const SwitchButton = styled(Button)`
-  transform: scale(0.11);
-  background: ${(props) => props.theme.palette.main};
   position: relative;
+  background: ${({ theme }) => theme.palette.main};
+  transform: scale(0.11);
 
   ${ButtonWrapper}.--active & {
     transform: none;
-    background: ${(props) => props.theme.palette.background};
+    background: ${({ theme }) => theme.palette.background};
   }
 `;
 
@@ -66,7 +66,6 @@ export const CircleButton: FC<ICircleButtonProps> = ({
   useEffect(() => {
     const active = activeId === period.id;
     setIsActive(active);
-
     updateAnimation();
   }, [activeId, period]);
 
@@ -109,7 +108,7 @@ export const CircleButton: FC<ICircleButtonProps> = ({
       <SwitchButton size="large" onClick={() => onClick(period.id)}>
         <Typography>{period.id}</Typography>
         {isActive && (
-          <ButtonLabel variant="body1" bold component="span">
+          <ButtonLabel variant="body1" component="span" bold>
             {period.sphere}
           </ButtonLabel>
         )}

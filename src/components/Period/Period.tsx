@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { Typography } from "../ui/Typography/Typography";
-import { CircleSwitch } from "../CircleSwitch/CIrcleSwitch";
+
 import { IHistoricalData, IHistoricalPeriod } from "../../services/data.types";
 import { UPDATE_INTERVAL, getNewYear, getPeriodsGap } from "./Period.helpers";
+import { Typography } from "../ui/Typography/Typography";
+import { CircleSwitch } from "../CircleSwitch/CIrcleSwitch";
 
 export interface IPeriodProps {
   periods: IHistoricalData;
@@ -20,12 +21,12 @@ const Wrapper = styled.div`
   &::after {
     content: "";
     position: absolute;
-    background: rgba(${(props) => props.theme.palette.transparent}, 0.1);
     left: 0;
     right: 0;
     top: 50%;
-    transform: translateY(-50%);
     margin: auto;
+    background: rgba(${(props) => props.theme.palette.transparent}, 0.1);
+    transform: translateY(-50%);
   }
   &::before {
     width: 100%;
@@ -35,9 +36,17 @@ const Wrapper = styled.div`
     width: 1px;
     height: 200vh;
   }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    justify-content: space-between;
+    margin: 9.8vh 0;
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
 `;
 
-const Year = styled(Typography).attrs<{ $startYear?: boolean }>((props) => ({
+const Year = styled(Typography).attrs<{ $startYear?: boolean }>(() => ({
   component: "span",
   variant: "h1",
   bold: true,
@@ -46,8 +55,15 @@ const Year = styled(Typography).attrs<{ $startYear?: boolean }>((props) => ({
   padding-bottom: 20px;
   letter-spacing: -4px;
   line-height: 100%;
-  color: ${(props) =>
-    props.theme.palette[props.$startYear ? "secondary" : "tertiary"]};
+  color: ${({ theme, $startYear }) =>
+    theme.palette[$startYear ? "secondary" : "tertiary"]};
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    ${({ theme }) => theme.typography.h2}
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    margin: 0;
+    padding-bottom: 0;
+  }
 `;
 
 export const Period: FC<IPeriodProps> = ({

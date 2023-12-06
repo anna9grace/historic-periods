@@ -1,4 +1,4 @@
-import React, { FC, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import { ButtonVariants, ControlTypes, SizeTypes } from "./Button.types";
 
@@ -7,8 +7,8 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   size?: SizeTypes;
   variant?: ButtonVariants;
-  onClick: (value: any) => void;
   control?: ControlTypes;
+  onClick: (value: any) => void;
 }
 
 const StyledButton = styled.button<{
@@ -18,12 +18,12 @@ const StyledButton = styled.button<{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   padding: 0;
   background: ${(props) => props.theme.palette.background};
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  flex-shrink: 0;
   color: ${(props) => props.theme.palette.main};
   &:disabled {
     opacity: 0.5;
@@ -33,6 +33,10 @@ const StyledButton = styled.button<{
     flex-shrink: 0;
     max-width: 100%;
     max-height: 100%;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    width: 25px;
+    height: 25px;
   }
   ${(props) => {
     switch (props.$size) {
@@ -75,10 +79,10 @@ export const Button = forwardRef<any, IButtonProps>(
     {
       children,
       className,
-      onClick,
       size = "medium",
       variant = "outlined",
       control,
+      onClick,
       ...rest
     },
     ref

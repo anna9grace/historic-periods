@@ -1,12 +1,10 @@
 import React, { FC, useRef, useState, useEffect } from "react";
 import { styled } from "styled-components";
+import gsap from "gsap";
 
 import { IHistoricalPeriod, IHistoricalData } from "../../services/data.types";
-
-import { CircleButton } from "../CircleButton/CircleButton";
-import gsap from "gsap";
-import { TweenMax } from "gsap";
 import { getCircleRotation } from "../../helpers/getCircleRotation.helper";
+import { CircleButton } from "../CircleButton/CircleButton";
 
 export interface ICircleSwitchProps {
   periods: IHistoricalData;
@@ -29,13 +27,20 @@ const Wrapper = styled.div`
   max-width: 600px;
   margin: auto;
   border-radius: 50%;
-  border: 1px solid rgba(${(props) => props.theme.palette.transparent}, 0.2);
+  border: 1px solid rgba(${({ theme }) => theme.palette.transparent}, 0.2);
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    height: 350px;
+    width: 350px;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    display: none;
+  }
 `;
 
 export const CircleSwitch: FC<ICircleSwitchProps> = ({
   periods,
-  onClick,
   currentPeriod,
+  onClick,
 }) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [currentRadius, setCurrentRadius] = useState(0);
@@ -50,14 +55,14 @@ export const CircleSwitch: FC<ICircleSwitchProps> = ({
     updateAnimation(currentPeriod.id);
   }, [currentPeriod]);
 
-  const updateRadius = () => {
-    if (!wrapperRef.current?.offsetHeight) return;
-    setCurrentRadius(wrapperRef.current?.offsetHeight / 2);
-  };
-
   const handleOnButtonClick = (id: number) => {
     onClick(id);
     updateAnimation(id);
+  };
+
+  const updateRadius = () => {
+    if (!wrapperRef.current?.offsetHeight) return;
+    setCurrentRadius(wrapperRef.current?.offsetHeight / 2);
   };
 
   const updateAnimation = (id: number) => {
