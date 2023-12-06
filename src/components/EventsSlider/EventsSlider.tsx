@@ -72,6 +72,7 @@ const ControlButton = styled(Button)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
   ${({ control }) =>
     control === "prev" ? `left: 40px; right: auto` : `right: 40px; left: auto`};
   @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
