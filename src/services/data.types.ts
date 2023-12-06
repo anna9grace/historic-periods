@@ -3,7 +3,7 @@ export enum CulturalSpheres {
   CINEMA = "Кино",
   LITERATURE = "Литература",
   THEATER = "Театр",
-  SOCIETY = "Общество",
+  SPORT = "Спорт",
   SCIENCE = "Наука",
 }
 
