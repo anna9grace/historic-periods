@@ -6,8 +6,8 @@
 
 * React
 * Typescript
+* Styled-Components
 * Swiper
-* Styled-Conpnents
 * Gsap
   
 ## Scripts
