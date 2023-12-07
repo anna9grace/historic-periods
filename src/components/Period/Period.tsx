@@ -17,30 +17,26 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 8vh 0 10vh;
-  &::before,
-  &::after {
+  &::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
     top: 50%;
+    width: 100%;
+    height: 1px;
     margin: auto;
     background: rgba(${(props) => props.theme.palette.transparent}, 0.1);
     transform: translateY(-50%);
   }
-  &::before {
-    width: 100%;
-    height: 1px;
-  }
-  &::after {
-    width: 1px;
-    height: 200vh;
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    margin: 5vh 0 6vh;
+    ${({ theme }) => theme.typography.h2}
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     justify-content: space-between;
     margin: 9.8vh 0;
-    &::before,
-    &::after {
+    &::before {
       content: none;
     }
   }
@@ -57,12 +53,13 @@ const Year = styled(Typography).attrs<{ $startYear?: boolean }>(() => ({
   line-height: 100%;
   color: ${({ theme, $startYear }) =>
     theme.palette[$startYear ? "secondary" : "tertiary"]};
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}px) {
-    ${({ theme }) => theme.typography.h2}
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    font-size: 160px;
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     margin: 0;
     padding-bottom: 0;
+    ${({ theme }) => theme.typography.h2}
   }
 `;
 

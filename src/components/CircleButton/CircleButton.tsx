@@ -82,7 +82,8 @@ export const CircleButton: FC<ICircleButtonProps> = ({
   const handleOnButtonLeave = () => {
     const target = currentRef.current?.children[0];
 
-    target &&
+    activeId !== period.id &&
+      target &&
       gsap.to(target, {
         backgroundColor: (themeContext?.palette.main as any) ?? "none",
         scale: 0.11,
@@ -93,7 +94,6 @@ export const CircleButton: FC<ICircleButtonProps> = ({
     gsap.to(currentRef.current, {
       rotate: getCircleRotation(activeId - 1, total),
     });
-
     activeId === period.id ? handleOnButtonHover() : handleOnButtonLeave();
   };
 

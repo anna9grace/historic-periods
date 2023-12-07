@@ -29,6 +29,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -39,11 +40,24 @@ const Wrapper = styled.div`
   border-left: 1px solid;
   border-right: 1px solid;
   border-color: rgba(${({ theme }) => theme.palette.transparent}, 0.1);
-
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    margin: auto;
+    background: rgba(${(props) => props.theme.palette.transparent}, 0.1);
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     justify-content: flex-start;
     padding: 13px 20px;
     border: none;
+    &::before {
+      content: none;
+    }
   }
 `;
 

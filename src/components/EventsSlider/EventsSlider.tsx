@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   width: 100%;
   align-self: flex-start;
   margin-top: 5.2vh;
+  margin-bottom: 20px;
   padding: 0 4.2vw;
   .swiper-pagination {
     display: none;
@@ -74,7 +75,7 @@ const ControlButton = styled(Button)`
   transform: translateY(-50%);
   z-index: 2;
   ${({ control }) =>
-    control === "prev" ? `left: 40px; right: auto` : `right: 40px; left: auto`};
+    control === "prev" ? `left: 2%; right: auto` : `right: 2%; left: auto`};
   @media (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
     ${({ control }) =>
       control === "prev" ? `left: 5px; right: auto` : `right: 5px; left: auto`};
@@ -144,7 +145,6 @@ export const EventsSlider: FC<IEventsSliderProps> = ({ events }) => {
           </EventSlide>
         ))}
       </Swiper>
-
       {!isFirstSlide && (
         <ControlButton
           ref={prevButtonRef}
